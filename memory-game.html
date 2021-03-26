@@ -1,0 +1,36 @@
+<link rel="import" href="../polymer/polymer-element.html">
+
+<dom-module id="memory-game">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <h2>Hello [[prop1]]!</h2>
+  </template>
+
+  <script>
+    /**
+     * `memory-game`
+     * 
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class MemoryGame extends Polymer.Element {
+      static get is() { return 'memory-game'; }
+      static get properties() {
+        return {
+          prop1: {
+            type: String,
+            value: 'memory-game'
+          }
+        };
+      }
+    }
+
+    window.customElements.define(MemoryGame.is, MemoryGame);
+  </script>
+</dom-module>
