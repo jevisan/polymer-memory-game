@@ -42,14 +42,14 @@
       <div id="score-board">
         <app-player-card
           id="player1"
-          playerName="[[player1.name]]"
+          player-name="[[player1.name]]"
           score="[[player1.score]]"
           active="[[player1.active]]"
         >
         </app-player-card>
         <app-player-card
           id="player2"
-          playerName="[[player2.name]]"
+          player-name="[[player2.name]]"
           score="[[player2.score]]"
           active="[[player2.active]]"
         >
@@ -116,7 +116,6 @@
           },
           currentPlayer: {
             type: Object,
-            value: this.player1
           },
           revealedCard1: {
             type: Object,
@@ -127,6 +126,12 @@
             value: null
           }
         };
+      }
+
+      connectedCallback() {
+        super.connectedCallback();
+        this.currentPlayer = this.player1;
+        console.log(this.currentPlayer);
       }
 
       getPlaySet() {
@@ -156,7 +161,7 @@
           this.revealedCard2.setState('show');
           setTimeout(() => {
             if (this.revealedCard1.symbol === this.revealedCard2.symbol) {
-              this.currentPlayer.score += 1;
+              // this.currentPlayer.score += 1;
               this.incrementScore();
               this.revealedCard1.setState('taken');
               this.revealedCard2.setState('taken');
@@ -173,9 +178,11 @@
 
       incrementScore() {
         if (this.currentPlayer === this.player1) {
+          console.log('updating player 1');
           this.player1.score += 1;
         } else {
-          this.player2 += 2;
+          console.log('updating player 2');
+          this.player2.score += 1;
         }
       }
 
@@ -189,6 +196,7 @@
           this.player2.active = true;
           this.player1.active = false;
         }
+        console.log(this.currentPlayer);
         const toggleActiveEvent = new CustomEvent('toggle-active');
       }
 
