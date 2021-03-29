@@ -1,0 +1,73 @@
+<link rel="import" href="../polymer/polymer-element.html">
+
+<dom-module id="app-player-card">
+  <template>
+    <style>
+     .score-container {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        width: 200px;
+        border-radius: 20px;
+        border: 5px solid white;
+        background-color: var(--bg-color-2);
+        color: var(--bg-color-3);
+      }
+      .score-container.active {
+        background-color: var(--secondary-color);
+        color: white;
+      }
+      span {
+        font-size: 2rem;
+      }
+    </style>
+    <div class$="score-container [[activeClass]]">
+      <h2>[[playerName]]</h2>
+      <span>[[score]]</span>
+    </div>
+  </template>
+
+  <script>
+    /**
+     * `app-player-card`
+     * 
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class AppPlayerCard extends Polymer.Element {
+      static get is() {
+        return 'app-player-card';
+      }
+      static get properties() {
+        return {
+          playerName: {
+            type: String,
+          },
+          score: {
+            type: Number
+          },
+          active: {
+            type: Boolean,
+          },
+          activeClass: {
+            type: String,
+            computed: 'getActiveClass(active)'
+          }
+        };
+      }
+      connectedCallback() {
+        super.connectedCallback();
+        console.log(this.playerName);
+      }
+
+      getActiveClass(active) {
+        console.log(active);
+        return active ? 'active' : '';
+      }
+    }
+
+    window.customElements.define(AppPlayerCard.is, AppPlayerCard);
+  </script>
+</dom-module>
